@@ -1,0 +1,3 @@
+track_collection_homepage:
+    path:     /
+    defaults: { _controller: TrackCollectionBundle:Page:index }

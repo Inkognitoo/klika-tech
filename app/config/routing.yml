@@ -1,3 +1,7 @@
+track_collection:
+    resource: "@TrackCollectionBundle/Resources/config/routing.yml"
+    prefix:   /
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
