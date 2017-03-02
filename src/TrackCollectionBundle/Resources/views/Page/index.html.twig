@@ -1,1 +1,107 @@
-Main page
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tracks Collection</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="root">
+        <article class="tracks-collection">
+            <section class="block-tracks">
+                <header>Плейлист</header>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>
+                            Исполнитель
+                            <div class="arrows">
+                                <span class="arrow-up"></span>
+                                <span class="arrow-down"></span>
+                            </div>
+                        </td>
+                        <td>
+                            Песня
+                            <div class="arrows">
+                                <span class="arrow-up"></span>
+                                <span class="arrow-down"></span>
+                            </div>
+                        </td>
+                        <td>
+                            Жанр
+                            <div class="arrows">
+                                <span class="arrow-up"></span>
+                                <span class="arrow-down"></span>
+                            </div>
+                        </td>
+                        <td>
+                            Год
+                            <div class="arrows">
+                                <span class="arrow-up"></span>
+                                <span class="arrow-down"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Led Zeppelin</td>
+                        <td>Kashmir</td>
+                        <td>Rock</td>
+                        <td>1975</td>
+                    </tr>
+                    <tr>
+                        <td>Miles Davis</td>
+                        <td>Blue in Green</td>
+                        <td>Jazz</td>
+                        <td>1959</td>
+                    </tr>
+                    <tr>
+                        <td>The Kingston Trio</td>
+                        <td>Tom Dooley</td>
+                        <td>Folk</td>
+                        <td>1958</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <footer>
+                    <nav>
+                        < 1 2 3 4 >
+                    </nav>
+                    <ul>
+                        <li>5</li>
+                        <li>10</li>
+                        <li>15</li>
+                        <li>20</li>
+                    </ul>
+                </footer>
+            </section>
+
+            <aside class="block-filters">
+                <h2>Фильтр</h2>
+                <div class="filters-wrap">
+                    <div class="filters">
+                        <label for="singer">Исполнитель</label>
+                        <select id="singer">
+                            <option>Все</option>
+                        </select>
+                        <label for="genre">Жанр</label>
+                        <select id="genre">
+                            <option>Все</option>
+                        </select>
+                        <label for="year">Год</label>
+                        <select id="year">
+                            <option>Все</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+        </article>
+    </div>
+</body>
+</html>
+
+
