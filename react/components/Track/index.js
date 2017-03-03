@@ -10,10 +10,10 @@ export default class Track extends React.Component {
     render() {
         return (
             <tr>
-                <td>The Kingston Trio</td>
-                <td>Tom Dooley</td>
-                <td>Folk</td>
-                <td>1958</td>
+                <td>{this.props.track.name}</td>
+                <td>{this.props.track.singer}</td>
+                <td>{this.props.track.genre}</td>
+                <td>{this.props.track.year}</td>
             </tr>
         );
     }
