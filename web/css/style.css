@@ -64,8 +64,16 @@
     border-color: gray transparent transparent transparent;
 }
 
+.active-arrow-up {
+    border-color: transparent transparent black transparent;
+}
+
+.active-arrow-down {
+    border-color: black transparent transparent transparent;
+}
+
 .tracks-wrap {
-    min-height: 180px;
+    min-height: 200px;
 }
 
 .block-tracks > footer {
@@ -75,6 +83,10 @@
     display: flex;
     margin: 0 auto 0 auto;
     align-self: flex-end;
+    color: gray;
+}
+.block-tracks > footer > nav > .active-page {
+    color: black;
 }
 .block-tracks > footer ul {
     display: flex;
@@ -93,6 +105,10 @@
 }
 .block-tracks > footer ul > li:not(:first-child) {
     border-left: 0;
+}
+
+.block-tracks > footer ul > li.active-count {
+    background-color: white;
 }
 
 .block-filters  {

@@ -6,9 +6,78 @@ import Track from '../Track';
 export default class Playlist extends React.Component {
     constructor(props) {
         super(props);
+
+        this.columns = [
+            {
+                internal_name: 'name',
+                name: 'Песня',
+                sort: null
+            },
+            {
+                internal_name: 'singer',
+                name: 'Исполнитель',
+                sort: null
+            },
+            {
+                internal_name: 'genre',
+                name: 'Жанр',
+                sort: null
+            },
+            {
+                internal_name: 'year',
+                name: 'Год',
+                sort: null
+            }
+        ];
+
+        this.tracks_count = [5, 10, 15, 20];
+
+        this.onClickTrackCount = this.onClickTrackCount.bind(this);
+        this.onClickPage = this.onClickPage.bind(this);
+        this.onClickSort = this.onClickSort.bind(this);
     }
 
     render() {
+        let columns = this.columns;
+        let pages = null;
+        let tracks_count = null;
+
+        try {
+            columns = columns.map((column) => {
+                let sort = this.props.sorts.find((sort) => { return column.internal_name == sort.internal_name});
+                if (sort) {
+                    column.sort = sort.type
+                }
+                return column;
+            });
+        } catch (err) {
+            console.error(err)
+        }
+
+        try {
+            pages = Array.apply(null, new Array(this.props.pages.count))
+                .map((x, i) => {
+                    return <span key={i}
+                                 data-value={i + 1}
+                                 onClick={(this.props.pages.current == i + 1) ? null : this.onClickPage}
+                                 className={(this.props.pages.current == i + 1) ? 'active-page' : null}>{i + 1}</span>;
+                });
+        } catch (err) {
+            console.error(err);
+        }
+
+        try {
+            tracks_count = this.tracks_count.map((count) => {
+                return <li key={count}
+                           value={count}
+                           onClick={this.onClickTrackCount}
+                           className={(this.props.pages.tracks_count == count) ? 'active-count' : null}>{count}</li>
+
+            })
+        } catch (err) {
+            console.error(err)
+        }
+
         return (
             <section className="block-tracks">
                 <header>Плейлист</header>
@@ -16,53 +85,59 @@ export default class Playlist extends React.Component {
                     <table>
                         <thead>
                         <tr>
-                            <td>
-                                Исполнитель
-                                <div className="arrows">
-                                    <span className="arrow-up"></span>
-                                    <span className="arrow-down"></span>
-                                </div>
-                            </td>
-                            <td>
-                                Песня
-                                <div className="arrows">
-                                    <span className="arrow-up"></span>
-                                    <span className="arrow-down"></span>
-                                </div>
-                            </td>
-                            <td>
-                                Жанр
-                                <div className="arrows">
-                                    <span className="arrow-up"></span>
-                                    <span className="arrow-down"></span>
-                                </div>
-                            </td>
-                            <td>
-                                Год
-                                <div className="arrows">
-                                    <span className="arrow-up"></span>
-                                    <span className="arrow-down"></span>
-                                </div>
-                            </td>
+                            {columns.map((column, i) => {
+                                return (
+                                    <td key={i}>
+                                        {column.name}
+                                        <div className="arrows">
+                                            <span
+                                                data-name={column.internal_name}
+                                                data-type="asc"
+                                                data-active={(column.sort == 'asc')}
+                                                onClick={this.onClickSort}
+                                                className={`arrow-up ${(column.sort == 'asc') ? "active-arrow-up" : ""}`}></span>
+                                            <span
+                                                data-name={column.internal_name}
+                                                data-type="desc"
+                                                data-active={(column.sort == 'desc')}
+                                                onClick={this.onClickSort}
+                                                className={`arrow-down ${(column.sort == 'desc') ? "active-arrow-down" : ""}`}></span>
+                                        </div>
+                                    </td>);
+                            })}
                         </tr>
                         </thead>
                         <tbody>
-                        <Track />
+                            {this.props.tracks.map((track) => {
+                                return <Track key={track.id} track={track} />
+                            })}
                         </tbody>
                     </table>
                 </div>
                 <footer>
                     <nav>
-                        [ 1 2 3 4 ]
+                        <span data-value="first" onClick={this.onClickPage}>[</span>
+                        {pages}
+                        <span data-value="last" onClick={this.onClickPage}>]</span>
                     </nav>
                     <ul>
-                        <li>5</li>
-                        <li>10</li>
-                        <li>15</li>
-                        <li>20</li>
+                        {tracks_count}
                     </ul>
                 </footer>
             </section>
         );
+    }
+
+    onClickSort(e) {
+        this.props.onClickSort(e.target.getAttribute("data-name"),
+            ((e.target.getAttribute("data-active") == "true")? null : e.target.getAttribute("data-type")));
+    }
+
+    onClickPage(e) {
+        this.props.onClickPage(e.target.getAttribute("data-value"))
+    }
+
+    onClickTrackCount(e) {
+        this.props.onClickTrackCount(e.target.value)
     }
 };
