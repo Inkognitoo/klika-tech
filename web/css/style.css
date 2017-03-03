@@ -64,6 +64,10 @@
     border-color: gray transparent transparent transparent;
 }
 
+.tracks-wrap {
+    min-height: 180px;
+}
+
 .block-tracks > footer {
     display: flex;
 }
