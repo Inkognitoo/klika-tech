@@ -112,12 +112,17 @@
     background-color: lightgrey;
 }
 
+.filter-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
 .filters {
     display: flex;
     flex-direction: column;
     margin: 5px;
 }
-.filters label:not(:first-child) {
+.filters .filter-wrap:not(:first-child) {
     margin-top: 5px;
 }
 .filters label {
