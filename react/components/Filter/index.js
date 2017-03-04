@@ -19,7 +19,7 @@ export default class Filter extends React.Component {
                 <label htmlFor="singer">Исполнитель</label>
                 <select id="singer" defaultValue={this.props.filters.variables.singer} onChange={this.onChangeFilter}>
                     {this.props.filters.contents.singers.map((singer) => {
-                        return <option key={singer.id} value={singer.internal_name}>{singer.name}</option>
+                        return <option key={singer.internal_name} value={singer.internal_name}>{singer.name}</option>
                     })}
                 </select>
             </span>;
@@ -33,7 +33,7 @@ export default class Filter extends React.Component {
                 <label htmlFor="genre">Жанр</label>
                 <select id="genre" defaultValue={this.props.filters.variables.genre} onChange={this.onChangeFilter}>
                     {this.props.filters.contents.genres.map((genre) => {
-                        return <option key={genre.id} value={genre.internal_name}>{genre.name}</option>
+                        return <option key={genre.internal_name} value={genre.internal_name}>{genre.name}</option>
                     })}
                 </select>
             </span>;
@@ -47,7 +47,7 @@ export default class Filter extends React.Component {
                 <label htmlFor="year">Год</label>
                 <select id="year" defaultValue={this.props.filters.variables.year} onChange={this.onChangeFilter}>
                     {this.props.filters.contents.years.map((year) => {
-                        return <option key={year.id} value={year.internal_name}>{year.name}</option>
+                        return <option key={year.internal_name} value={year.internal_name}>{year.name}</option>
                     })}
                 </select>
             </span>;
