@@ -195,4 +195,17 @@ class Singer
     {
         return $this->tracks;
     }
+
+    /**
+     * Serialize object to array
+     *
+     * @return array
+     */
+    public function serialize() {
+        return [
+            'id' => $this->getId(),
+            'internal_name' => $this->getInternalName(),
+            'name' => $this->getName(),
+        ];
+    }
 }

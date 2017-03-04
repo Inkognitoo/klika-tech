@@ -213,4 +213,19 @@ class Track
     {
         return $this->year;
     }
+
+    /**
+     * Serialize object to array
+     *
+     * @return array
+     */
+    public function serialize() {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'singer' => $this->getSinger()->getName(),
+            'genre' => $this->getGenre()->getName(),
+            'year' => $this->getYear()->getName()
+        ];
+    }
 }
