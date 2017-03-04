@@ -1,6 +1,8 @@
 track_collection_homepage:
     path:     /
     defaults: { _controller: TrackCollectionBundle:Page:index }
+    requirements:
+                method: GET
 
 tracks_list:
     path:     /api/tracks
