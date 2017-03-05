@@ -24,11 +24,6 @@ class Seed implements FixtureInterface
         $manager->persist($years[count($years)-1]);
 
         $years[] = new Year();
-        $years[count($years)-1]->setInternalName(1993);
-        $years[count($years)-1]->setName(1993);
-        $manager->persist($years[count($years)-1]);
-
-        $years[] = new Year();
         $years[count($years)-1]->setInternalName(1994);
         $years[count($years)-1]->setName(1994);
         $manager->persist($years[count($years)-1]);
@@ -101,8 +96,8 @@ class Seed implements FixtureInterface
     }
 
     private function randomName() {
-        $names1 = ['big', 'old', 'green', 'little', 'young'];
-        $names2 = ['dog', 'woman', 'cat', 'car', 'house'];
+        $names1 = ['big', 'old', 'green', 'little', 'young', 'lovely', 'dirty', 'gray'];
+        $names2 = ['dog', 'woman', 'cat', 'car', 'house', 'gun', 'boat'];
         $names3 = ['and me', 'was wrong', 'in the night', 'kills', 'love you'];
         return ucfirst($names1[array_rand($names1, 1)].' '.
                         $names2[array_rand($names2, 1)].' '.
