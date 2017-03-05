@@ -21,19 +21,22 @@ class TrackController extends Controller
             'pages' => []
         ];
         $singers = $em->getRepository('TrackCollectionBundle:Singer')->findAll();
-        $out['filters']['contents']['singer'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['contents']['singers'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['variables']['singer'] = 'all';
         foreach ($singers as $singer) {
-            $out['filters']['contents']['singer'][] = $singer->serialize();
+            $out['filters']['contents']['singers'][] = $singer->serialize();
         }
         $genres = $em->getRepository('TrackCollectionBundle:Genre')->findAll();
-        $out['filters']['contents']['genre'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['contents']['genres'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['variables']['genre'] = 'all';
         foreach ($genres as $genre) {
-            $out['filters']['contents']['genre'][] = $genre->serialize();
+            $out['filters']['contents']['genres'][] = $genre->serialize();
         }
         $years = $em->getRepository('TrackCollectionBundle:Year')->findAll();
-        $out['filters']['contents']['year'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['contents']['years'][] = ['internal_name' => 'all', 'name' => 'Все'];
+        $out['filters']['variables']['year'] = 'all';
         foreach ($years as $year) {
-            $out['filters']['contents']['year'][] = $year->serialize();
+            $out['filters']['contents']['years'][] = $year->serialize();
         }
 
         $track_count = 5;
