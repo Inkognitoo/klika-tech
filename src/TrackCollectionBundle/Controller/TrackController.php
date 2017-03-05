@@ -84,6 +84,10 @@ class TrackController extends Controller
                         }
                     }
                 }
+
+                $_count = $tracks->getQuery()
+                    ->getResult();
+                $count = count($_count);
             }
 
             if (array_key_exists('sorts', $payload)) {
