@@ -150,7 +150,9 @@ class TrackController extends Controller
                     }
                 }
             }
-
+            if(count($out['sorts']) == 0) {
+                $tracks = $tracks->addOrderBy('track.id', 'ASC');
+            }
 
             if (array_key_exists('pages', $payload)) {
                 if (is_array($payload['pages']) && array_key_exists('tracks_count', $payload['pages'])) {
