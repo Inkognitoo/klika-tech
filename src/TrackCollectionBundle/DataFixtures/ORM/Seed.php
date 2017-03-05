@@ -83,7 +83,7 @@ class Seed implements FixtureInterface
         $manager->persist($singers[count($singers)-1]);
 
         $singers[] = new Singer();
-        $singers[count($singers)-1]->setInternalName('three_days_grace ');
+        $singers[count($singers)-1]->setInternalName('three_days_grace');
         $singers[count($singers)-1]->setName('Three Days Grace');
         $manager->persist($singers[count($singers)-1]);
 
