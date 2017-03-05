@@ -159,6 +159,11 @@ class TrackController extends Controller
             }
         }
 
+        $count = ($count > 0) ? ceil($count / $track_count) : 0;
+        if ($current_page > $count) {
+            $current_page = $count;
+        }
+        
         $tracks = $tracks->setFirstResult(($current_page - 1) * $track_count)
             ->setMaxResults($track_count)
             ->getQuery()
@@ -168,7 +173,7 @@ class TrackController extends Controller
             $out['tracks'][] = $track->serialize();
         }
 
-        $out['pages']['count'] = ($count > 0) ? ceil($count / $track_count) : 0;
+        $out['pages']['count'] = $count;
         $out['pages']['current'] = $current_page;
         $out['pages']['tracks_count'] = $track_count;
 
