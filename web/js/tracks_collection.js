@@ -23716,16 +23716,21 @@ var TrackCollection = function (_React$Component) {
                 tracks_count: 5
             }
         };
-
-        _this.getTracks(_this.state).then(function (new_state) {
-            _this.setState(new_state);
-        }).catch(function (err) {
-            console.error(err);
-        });
         return _this;
     }
 
     _createClass(TrackCollection, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.getTracks(this.state).then(function (new_state) {
+                _this2.setState(new_state);
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -23746,7 +23751,7 @@ var TrackCollection = function (_React$Component) {
     }, {
         key: 'onClickPage',
         value: function onClickPage(current_page) {
-            var _this2 = this;
+            var _this3 = this;
 
             if (current_page == 'minus') {
                 current_page = this.state.pages.current > 1 ? this.state.pages.current - 1 : this.state.pages.current;
@@ -23757,7 +23762,7 @@ var TrackCollection = function (_React$Component) {
             var payload = _extends({}, this.state, { pages: _extends({}, this.state.pages, { current: current_page }) });
 
             this.getTracks(payload).then(function (new_state) {
-                _this2.setState(new_state);
+                _this3.setState(new_state);
             }).catch(function (err) {
                 console.error(err);
             });
@@ -23765,12 +23770,12 @@ var TrackCollection = function (_React$Component) {
     }, {
         key: 'onClickTracksCount',
         value: function onClickTracksCount(tracks_count) {
-            var _this3 = this;
+            var _this4 = this;
 
             var payload = _extends({}, this.state, { pages: _extends({}, this.state.pages, { tracks_count: tracks_count }) });
 
             this.getTracks(payload).then(function (new_state) {
-                _this3.setState(new_state);
+                _this4.setState(new_state);
             }).catch(function (err) {
                 console.error(err);
             });
@@ -23778,7 +23783,7 @@ var TrackCollection = function (_React$Component) {
     }, {
         key: 'onChangeFilter',
         value: function onChangeFilter(type, value) {
-            var _this4 = this;
+            var _this5 = this;
 
             var filter = {};
             Object.defineProperty(filter, type, {
@@ -23792,7 +23797,7 @@ var TrackCollection = function (_React$Component) {
                 }) });
 
             this.getTracks(payload).then(function (new_state) {
-                _this4.setState(new_state);
+                _this5.setState(new_state);
             }).catch(function (err) {
                 console.error(err);
             });
@@ -23800,7 +23805,7 @@ var TrackCollection = function (_React$Component) {
     }, {
         key: 'onClickSort',
         value: function onClickSort(name, type) {
-            var _this5 = this;
+            var _this6 = this;
 
             var sorts = [];
             if (type == null) {
@@ -23824,7 +23829,7 @@ var TrackCollection = function (_React$Component) {
 
             var payload = _extends({}, this.state, { sorts: sorts });
             this.getTracks(payload).then(function (new_state) {
-                _this5.setState(new_state);
+                _this6.setState(new_state);
             }).catch(function (err) {
                 console.error(err);
             });
@@ -23832,7 +23837,7 @@ var TrackCollection = function (_React$Component) {
     }, {
         key: 'getTracks',
         value: function getTracks(payload) {
-            var _this6 = this;
+            var _this7 = this;
 
             var filters = [];
             for (var name in payload.filters.variables) {
@@ -23849,11 +23854,12 @@ var TrackCollection = function (_React$Component) {
                         sorts: payload.sorts
                     }
                 } }).then(function (response) {
-                console.log('new_state', _extends({}, _this6.state, response.data));
-                return _extends({}, _this6.state, response.data);
+                var new_state = _extends({}, _this7.state, response.data);
+                console.log('new_state', new_state);
+                return new_state;
             }).catch(function (error) {
                 console.error(error);
-                return _this6.state;
+                return _this7.state;
             });
         }
     }]);
