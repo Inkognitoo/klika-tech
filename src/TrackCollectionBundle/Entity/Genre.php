@@ -203,7 +203,6 @@ class Genre
      */
     public function serialize() {
         return [
-            'id' => $this->getId(),
             'internal_name' => $this->getInternalName(),
             'name' => $this->getName(),
         ];
