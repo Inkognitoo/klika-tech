@@ -50,8 +50,7 @@ class TrackController extends Controller
             ->innerJoin('track.year', 'year')
             ->innerJoin('track.genre', 'genre')
             ->innerJoin('track.singer', 'singer')
-            ->where('1 = 1')
-            ->addOrderBy('track.id', 'ASC');
+            ->where('1 = 1');
 
         if (is_array($payload)) {
             if (array_key_exists('filters', $payload)) {
