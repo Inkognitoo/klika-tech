@@ -1,0 +1,11 @@
+track_collection_homepage:
+    path:     /
+    defaults: { _controller: TrackCollectionBundle:Page:index }
+    requirements:
+                method: GET
+
+tracks_list:
+    path:     /api/tracks
+    defaults: { _controller: TrackCollectionBundle:Track:get }
+    requirements:
+            method: GET
