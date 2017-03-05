@@ -145,8 +145,8 @@ class TrackController extends Controller
 
 
             if (array_key_exists('pages', $payload)) {
-                if (array_key_exists('track_count', $payload['pages'])) {
-                    $track_count = ((int)$payload['pages']['track_count'] > 0) ? (int)$payload['pages']['track_count'] : $track_count;
+                if (array_key_exists('tracks_count', $payload['pages'])) {
+                    $track_count = ((int)$payload['pages']['tracks_count'] > 0) ? (int)$payload['pages']['tracks_count'] : $track_count;
                 }
 
                 if (array_key_exists('current', $payload['pages'])) {

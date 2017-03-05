@@ -32,7 +32,7 @@ export default class Playlist extends React.Component {
 
         this.tracks_count = [5, 10, 15, 20];
 
-        this.onClickTrackCount = this.onClickTrackCount.bind(this);
+        this.onClickTracksCount = this.onClickTracksCount.bind(this);
         this.onClickPage = this.onClickPage.bind(this);
         this.onClickSort = this.onClickSort.bind(this);
     }
@@ -70,7 +70,7 @@ export default class Playlist extends React.Component {
             tracks_count = this.tracks_count.map((count) => {
                 return <li key={count}
                            value={count}
-                           onClick={this.onClickTrackCount}
+                           onClick={this.onClickTracksCount}
                            className={(this.props.pages.tracks_count == count) ? 'active-count' : null}>{count}</li>
 
             })
@@ -137,7 +137,7 @@ export default class Playlist extends React.Component {
         this.props.onClickPage(e.target.getAttribute("data-value"))
     }
 
-    onClickTrackCount(e) {
-        this.props.onClickTrackCount(e.target.value)
+    onClickTracksCount(e) {
+        this.props.onClickTracksCount(e.target.value)
     }
 };
