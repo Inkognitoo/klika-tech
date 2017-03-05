@@ -52,7 +52,7 @@ class TrackController extends Controller
         if (is_array($payload)) {
             if (array_key_exists('filters', $payload)) {
                 foreach ($payload['filters'] as $filter) {
-                    if (array_key_exists('name', $filter) && array_key_exists('value', $filter)) {
+                    if (is_array($filter) && array_key_exists('name', $filter) && array_key_exists('value', $filter)) {
                         switch ($filter['name']) {
                             case 'singer':
                                 $singer = $em->getRepository('TrackCollectionBundle:Singer')
@@ -88,7 +88,7 @@ class TrackController extends Controller
 
             if (array_key_exists('sorts', $payload)) {
                 foreach ($payload['sorts'] as $sort) {
-                    if (array_key_exists('internal_name', $sort) && array_key_exists('type', $sort)) {
+                    if (is_array($sort) && array_key_exists('internal_name', $sort) && array_key_exists('type', $sort)) {
                         switch ($sort['internal_name']) {
                             case 'name':
                                 switch ($sort['type']) {
@@ -145,11 +145,11 @@ class TrackController extends Controller
 
 
             if (array_key_exists('pages', $payload)) {
-                if (array_key_exists('tracks_count', $payload['pages'])) {
+                if (is_array($payload['pages']) && array_key_exists('tracks_count', $payload['pages'])) {
                     $track_count = ((int)$payload['pages']['tracks_count'] > 0) ? (int)$payload['pages']['tracks_count'] : $track_count;
                 }
 
-                if (array_key_exists('current', $payload['pages'])) {
+                if (is_array($payload['pages']) && array_key_exists('current', $payload['pages'])) {
                     $current_page = ((int)$payload['pages']['current'] > 0) ? (int)$payload['pages']['current'] : $current_page;
                 }
             }
