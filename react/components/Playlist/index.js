@@ -116,9 +116,9 @@ export default class Playlist extends React.Component {
                 </div>
                 <footer>
                     <nav>
-                        <span data-value="first" onClick={this.onClickPage}>[</span>
+                        <span data-value="minus" onClick={(this.props.pages.current > 1) ? this.onClickPage : null}>[</span>
                         {pages}
-                        <span data-value="last" onClick={this.onClickPage}>]</span>
+                        <span data-value="plus" onClick={(this.props.pages.current < this.props.pages.count) ? this.onClickPage : null}>]</span>
                     </nav>
                     <ul>
                         {tracks_count}
