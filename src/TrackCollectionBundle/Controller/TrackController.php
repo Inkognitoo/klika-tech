@@ -166,7 +166,7 @@ class TrackController extends Controller
 
         $out['pages']['count'] = ($count > 0) ? ceil($count / $track_count) : 0;
         $out['pages']['current'] = $current_page;
-        $out['pages']['track_count'] = $track_count;
+        $out['pages']['tracks_count'] = $track_count;
 
         return new JsonResponse($out);
     }
