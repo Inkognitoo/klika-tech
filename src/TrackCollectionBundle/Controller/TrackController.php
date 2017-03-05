@@ -46,7 +46,10 @@ class TrackController extends Controller
 
         $payload = json_decode($request->query->get('payload'), true);
 
-        $tracks = $em->createQueryBuilder()->select('track')->from('TrackCollectionBundle:Track', 'track')
+        $tracks = $em->createQueryBuilder()->select('track', 'year', 'genre', 'singer')->from('TrackCollectionBundle:Track', 'track')
+            ->innerJoin('track.year', 'year')
+            ->innerJoin('track.genre', 'genre')
+            ->innerJoin('track.singer', 'singer')
             ->where('1 = 1');
 
         if (is_array($payload)) {
@@ -109,11 +112,11 @@ class TrackController extends Controller
                             case 'singer':
                                 switch ($sort['type']) {
                                     case 'asc':
-                                        $tracks = $tracks->addOrderBy('track.singer', 'ASC');
+                                        $tracks = $tracks->addOrderBy('singer.name', 'ASC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                     case 'desc':
-                                        $tracks = $tracks->addOrderBy('track.singer', 'DESC');
+                                        $tracks = $tracks->addOrderBy('singer.name', 'DESC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                 }
@@ -121,11 +124,11 @@ class TrackController extends Controller
                             case 'genre':
                                 switch ($sort['type']) {
                                     case 'asc':
-                                        $tracks = $tracks->addOrderBy('track.genre', 'ASC');
+                                        $tracks = $tracks->addOrderBy('genre.name', 'ASC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                     case 'desc':
-                                        $tracks = $tracks->addOrderBy('track.genre', 'DESC');
+                                        $tracks = $tracks->addOrderBy('genre.name', 'DESC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                 }
@@ -133,11 +136,11 @@ class TrackController extends Controller
                             case 'year':
                                 switch ($sort['type']) {
                                     case 'asc':
-                                        $tracks = $tracks->addOrderBy('track.year', 'ASC');
+                                        $tracks = $tracks->addOrderBy('year.name', 'ASC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                     case 'desc':
-                                        $tracks = $tracks->addOrderBy('track.year', 'DESC');
+                                        $tracks = $tracks->addOrderBy('year.name', 'DESC');
                                         $out['sorts'][] = ['internal_name' => $sort['internal_name'], 'type' => $sort['type']];
                                         break;
                                 }
@@ -163,7 +166,7 @@ class TrackController extends Controller
         if ($current_page > $count) {
             $current_page = $count;
         }
-        
+
         $tracks = $tracks->setFirstResult(($current_page - 1) * $track_count)
             ->setMaxResults($track_count)
             ->getQuery()
