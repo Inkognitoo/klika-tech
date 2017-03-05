@@ -33,14 +33,20 @@ class TrackCollection extends React.Component {
                 tracks_count: 5
             }
         };
+    }
 
-        this.getTracks(this.state)
-            .then((new_state) => {
-                this.setState(new_state);
-            })
-            .catch((err) => {
-                console.error(err)
-            });
+    componentDidMount() {
+        if (localStorage.getItem('state')) {
+            this.setState(JSON.parse(localStorage.getItem('state')));
+        } else {
+            this.getTracks(this.state)
+                .then((new_state) => {
+                    this.setState(new_state);
+                })
+                .catch((err) => {
+                    console.error(err)
+                });
+        }
     }
 
     render() {
@@ -162,8 +168,10 @@ class TrackCollection extends React.Component {
                 }
         }})
             .then((response) => {
-                console.log('new_state', {...this.state, ...response.data});
-                return {...this.state, ...response.data};
+                let new_state = {...this.state, ...response.data};
+                console.log('new_state', new_state);
+                localStorage.setItem('state', JSON.stringify(new_state));
+                return new_state;
             })
             .catch((error) => {
                 console.error(error);
