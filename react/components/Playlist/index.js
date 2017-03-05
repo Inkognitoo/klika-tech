@@ -38,7 +38,7 @@ export default class Playlist extends React.Component {
     }
 
     render() {
-        let columns = this.columns;
+        let columns = new Array(...this.columns.map((column) => {return {...column}}));
         let pages = null;
         let tracks_count = null;
 
