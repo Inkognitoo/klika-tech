@@ -33,7 +33,9 @@ class TrackCollection extends React.Component {
                 tracks_count: 5
             }
         };
+    }
 
+    componentDidMount() {
         this.getTracks(this.state)
             .then((new_state) => {
                 this.setState(new_state);
@@ -146,6 +148,10 @@ class TrackCollection extends React.Component {
     }
 
     getTracks(payload) {
+        /* Здесь я вступил в конфликт с самим собой, пытаясь выбрать, реализовать более удобное api для клиента или
+        для сервера. В итоге я решил реализовать его и на клиенте, и на сервере - по своему, а здесь установить небольшой
+        декоратор для преоброзавния из удобного вида для клиентского кода в удобный вид для серверного
+        */
         let filters = [];
         for (let name in payload.filters.variables) {
             filters.push({name: name, value: payload.filters.variables[name]});
@@ -162,14 +168,14 @@ class TrackCollection extends React.Component {
                 }
         }})
             .then((response) => {
-                console.log('new_state', {...this.state, ...response.data});
-                return {...this.state, ...response.data};
+                let new_state = {...this.state, ...response.data};
+                console.log('new_state', new_state);
+                return new_state;
             })
             .catch((error) => {
                 console.error(error);
                 return this.state;
             });
-
     }
 }
 
