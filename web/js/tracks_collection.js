@@ -10157,7 +10157,14 @@ var Filter = function (_React$Component) {
             var singers_select = null;
             var genres_select = null;
             var years_select = null;
-
+            /*
+             * Обработчики ошибок присутствуют на тот случай, если сервер вернёт что-то не то, тогда в крайнем случае мы
+             * получим приложение с обрезенной функциональностью (отствующий фильтр/фильтры) но работающее.
+             *
+             * С одной стороны, ситуацию с неверными/отсутствующими данными можно проверить в родительском компоненте
+             * перед отправкой вниз, но мне показалось удобней научить компоненты самостоятельно обрабатывать неприятные
+             * ситуации и не раздувать родительский компонент.
+             */
             try {
                 singers_select = _react2.default.createElement(
                     'span',
@@ -10286,7 +10293,7 @@ var _react = __webpack_require__(26);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Track = __webpack_require__(108);
+var _Track = __webpack_require__(206);
 
 var _Track2 = _interopRequireDefault(_Track);
 
@@ -11338,87 +11345,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(26);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Track = function (_React$Component) {
-    _inherits(Track, _React$Component);
-
-    function Track(props) {
-        _classCallCheck(this, Track);
-
-        return _possibleConstructorReturn(this, (Track.__proto__ || Object.getPrototypeOf(Track)).call(this, props));
-    }
-
-    _createClass(Track, [{
-        key: 'render',
-        value: function render() {
-            var track = null;
-            try {
-                track = _react2.default.createElement(
-                    'tr',
-                    null,
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        this.props.track.name
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        this.props.track.singer
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        this.props.track.genre
-                    ),
-                    _react2.default.createElement(
-                        'td',
-                        null,
-                        this.props.track.year
-                    )
-                );
-            } catch (err) {
-                console.error(err);
-            }
-
-            if (track) {
-                return track;
-            } else {
-                return null;
-            }
-        }
-    }]);
-
-    return Track;
-}(_react2.default.Component);
-
-exports.default = Track;
-;
-
-/***/ }),
+/* 108 */,
 /* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23839,6 +23766,10 @@ var TrackCollection = function (_React$Component) {
         value: function getTracks(payload) {
             var _this7 = this;
 
+            /* Здесь я вступил в конфликт с самим собой, пытаясь выбрать, реализовать более удобное api для клиента или
+            для сервера. В итоге я решил реализовать его и на клиенте, и на сервере - по своему, а здесь установить небольшой
+            декоратор для преоброзавния из удобного вида для клиентского кода в удобный вид для серверного
+            */
             var filters = [];
             for (var name in payload.filters.variables) {
                 filters.push({ name: name, value: payload.filters.variables[name] });
@@ -23868,6 +23799,87 @@ var TrackCollection = function (_React$Component) {
 }(_react2.default.Component);
 
 _reactDom2.default.render(_react2.default.createElement(TrackCollection, null), document.getElementById('root'));
+
+/***/ }),
+/* 206 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(26);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Track = function (_React$Component) {
+    _inherits(Track, _React$Component);
+
+    function Track(props) {
+        _classCallCheck(this, Track);
+
+        return _possibleConstructorReturn(this, (Track.__proto__ || Object.getPrototypeOf(Track)).call(this, props));
+    }
+
+    _createClass(Track, [{
+        key: 'render',
+        value: function render() {
+            var track = null;
+            try {
+                track = _react2.default.createElement(
+                    'tr',
+                    null,
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        this.props.track.name
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        this.props.track.singer
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        this.props.track.genre
+                    ),
+                    _react2.default.createElement(
+                        'td',
+                        null,
+                        this.props.track.year
+                    )
+                );
+            } catch (err) {
+                console.error(err);
+            }
+
+            if (track) {
+                return track;
+            } else {
+                return null;
+            }
+        }
+    }]);
+
+    return Track;
+}(_react2.default.Component);
+
+exports.default = Track;
+;
 
 /***/ })
 /******/ ]);

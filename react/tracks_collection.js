@@ -148,6 +148,10 @@ class TrackCollection extends React.Component {
     }
 
     getTracks(payload) {
+        /* Здесь я вступил в конфликт с самим собой, пытаясь выбрать, реализовать более удобное api для клиента или
+        для сервера. В итоге я решил реализовать его и на клиенте, и на сервере - по своему, а здесь установить небольшой
+        декоратор для преоброзавния из удобного вида для клиентского кода в удобный вид для серверного
+        */
         let filters = [];
         for (let name in payload.filters.variables) {
             filters.push({name: name, value: payload.filters.variables[name]});
@@ -172,7 +176,6 @@ class TrackCollection extends React.Component {
                 console.error(error);
                 return this.state;
             });
-
     }
 }
 
