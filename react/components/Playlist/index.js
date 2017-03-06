@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import Track from '../Track';
+import Track from './Track';
 
 export default class Playlist extends React.Component {
     constructor(props) {
