@@ -1,5 +1,5 @@
 {
-    "name": "inkognitoo/.checkout",
+    "name": "Tracks collection",
     "license": "proprietary",
     "type": "project",
     "autoload": {
@@ -54,7 +54,13 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_name": "SYMFONY__DATABASE_NAME",
+                "database_user": "SYMFONY__DATABASE_USER",
+                "database_host": "SYMFONY__DATABASE_HOST",
+                "database_password": "SYMFONY__DATABASE_PASSWORD"
+            }
         },
         "branch-alias": null
     }
