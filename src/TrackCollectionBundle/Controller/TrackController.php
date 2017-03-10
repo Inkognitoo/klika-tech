@@ -190,7 +190,7 @@ class TrackController extends Controller
         //Если клиент запрашивает несуществующую страницу, отдаём ему последнюю из имеющихся
         $count = ($count > 0) ? ceil($count / $track_count) : 0;
         if ($current_page > $count) {
-            $current_page = $count;
+            $current_page = ($count > 0) ? $count : 1;
         }
 
         $tracks = $tracks->setFirstResult(($current_page - 1) * $track_count)
