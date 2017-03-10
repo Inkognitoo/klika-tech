@@ -119,8 +119,8 @@ class TrackCollection extends React.Component {
     onClickSort(name, type) {
         let sorts = [];
         if (type == null) {
-            sorts = this.state.sorts.map((sort) => {
-                return (sort.internal_name == name) ? null : sort;
+            sorts = this.state.sorts.filter((sort) => {
+                return (sort.internal_name != name);
             });
         } else {
             let is_update = false;
